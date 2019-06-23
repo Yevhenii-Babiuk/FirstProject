@@ -32,7 +32,7 @@ public class Library implements Observer {
 
     public void serchBooksByEndDate(LocalDate min, LocalDate max) {
         for (LibraryOrder order : orderBase) {
-            if (order.getStart().isAfter(min) && order.getStart().isBefore(max)) {
+            if (order.getEnd().isAfter(min) && order.getStart().isBefore(max)) {
                 System.out.println(order);
             }
         }
@@ -50,7 +50,7 @@ public class Library implements Observer {
 
     public void searchBooksByClient(String surname){
         for (LibraryOrder order : orderBase) {
-            if(surname.equals(order)){
+            if(surname.equals(order.client.getSurname())){
                 System.out.println(order.getBook().getName());
             }
         }

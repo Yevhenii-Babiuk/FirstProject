@@ -23,7 +23,7 @@ public class LibrarySystem {
         control.searchBooksByClient("Babiuk");
 
         control.serchBooksByStartDate(LocalDate.of(2019,2,25), LocalDate.of(2019,3,10));
-        control.serchBooksByStartDate(LocalDate.of(2019,3,25), LocalDate.of(2019,5,5));
+        control.serchBooksByEndDate(LocalDate.of(2019,3,25), LocalDate.of(2019,5,5));
         System.out.println(alphabet.getAvailableNumber());
         control.setStatusBack(1111);
         System.out.println(alphabet.getAvailableNumber());

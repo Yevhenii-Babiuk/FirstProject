@@ -8,7 +8,7 @@ public class LibraryOrder{
     private List<Observer> observers;
     private int orderId;
     protected Book book;
-    private Client client;
+    protected Client client;
     private LocalDate start;
     private LocalDate end;
     protected boolean isBack;
