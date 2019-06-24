@@ -7,8 +7,8 @@ import java.util.List;
 public class LibraryOrder{
     private List<Observer> observers;
     private int orderId;
-    protected Book book;
-    protected Client client;
+    public Book book;
+    public Client client;
     private LocalDate start;
     private LocalDate end;
     protected boolean isBack;
@@ -42,7 +42,6 @@ public class LibraryOrder{
         this.start=start;
         this.end=end;
         this.isBack=isBack;
-
         notifyObserver();
     }
 

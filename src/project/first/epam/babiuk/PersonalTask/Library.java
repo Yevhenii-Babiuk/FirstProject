@@ -16,42 +16,42 @@ public class Library implements Observer {
     }
 
     @Override
-    public void newOrder(LibraryOrder order) {
-        orderBase.add(order);
-        order.book.availableNumber -= 1;
+    public void newOrder(LibraryOrder orders) {
+        orderBase.add(orders);
+        orders.book.availableNumber -= 1;
         display();
     }
 
     public void serchBooksByStartDate(LocalDate min, LocalDate max) {
-        for (LibraryOrder order : orderBase) {
-            if (order.getStart().isAfter(min) && order.getStart().isBefore(max)) {
-                System.out.println(order);
+        for (LibraryOrder orders : orderBase) {
+            if (orders.getStart().isAfter(min) && orders.getStart().isBefore(max)) {
+                System.out.println(orders);
             }
         }
     }
 
     public void serchBooksByEndDate(LocalDate min, LocalDate max) {
-        for (LibraryOrder order : orderBase) {
-            if (order.getEnd().isAfter(min) && order.getStart().isBefore(max)) {
-                System.out.println(order);
+        for (LibraryOrder orders : orderBase) {
+            if (orders.getEnd().isAfter(min) && orders.getEnd().isBefore(max)) {
+                System.out.println(orders);
             }
         }
     }
 
     public void setStatusBack(int orderId) {
-        for (LibraryOrder order : orderBase) {
-            if (order.getOderId() == orderId) {
-                order.book.availableNumber += 1;
-                order.isBack = true;
+        for (LibraryOrder orders : orderBase) {
+            if (orders.getOderId() == orderId) {
+                orders.book.availableNumber += 1;
+                orders.isBack = true;
                 System.out.println("Your book is back");
             }
         }
     }
 
     public void searchBooksByClient(String surname){
-        for (LibraryOrder order : orderBase) {
-            if(surname.equals(order.client.getSurname())){
-                System.out.println(order.getBook().getName());
+        for (LibraryOrder orders : orderBase) {
+            if(orders.client.getSurname().equals(surname)){
+                System.out.println(orders.book.getName());
             }
         }
     }
