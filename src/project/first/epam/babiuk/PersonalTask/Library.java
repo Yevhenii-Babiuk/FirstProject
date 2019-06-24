@@ -17,9 +17,14 @@ public class Library implements Observer {
 
     @Override
     public void newOrder(LibraryOrder orders) {
-        orderBase.add(orders);
-        orders.book.availableNumber -= 1;
-        display();
+        try {
+            LibraryOrder newLibraryOrder = orders.clone();
+            orderBase.add(newLibraryOrder);
+            orders.getBook().setAvailableNumber(-1);
+            display();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void serchBooksByStartDate(LocalDate min, LocalDate max) {
@@ -32,7 +37,7 @@ public class Library implements Observer {
 
     public void serchBooksByEndDate(LocalDate min, LocalDate max) {
         for (LibraryOrder orders : orderBase) {
-            if (orders.getEnd().isAfter(min) && orders.getEnd().isBefore(max)) {
+            if (orders.getEnd().isAfter(min) && orders.getEnd().isBefore(max) && orders.getBack()) {
                 System.out.println(orders);
             }
         }
@@ -41,17 +46,17 @@ public class Library implements Observer {
     public void setStatusBack(int orderId) {
         for (LibraryOrder orders : orderBase) {
             if (orders.getOderId() == orderId) {
-                orders.book.availableNumber += 1;
-                orders.isBack = true;
+                orders.getBook().setAvailableNumber(1);
+                orders.setBack();
                 System.out.println("Your book is back");
             }
         }
     }
 
-    public void searchBooksByClient(String surname){
+    public void searchBooksByClient(String surname) {
         for (LibraryOrder orders : orderBase) {
-            if(orders.client.getSurname().equals(surname)){
-                System.out.println(orders.book.getName());
+            if (orders.getClient().getSurname().equals(surname)&&!orders.getBack()) {
+                System.out.println(surname+" is reading "+orders.getBook().getName());
             }
         }
     }
@@ -59,5 +64,11 @@ public class Library implements Observer {
 
     public void display() {
         System.out.println("New order is registered");
+    }
+
+    public void printAllOrders() {
+        for (LibraryOrder orders : orderBase) {
+            System.out.println(orders);
+        }
     }
 }

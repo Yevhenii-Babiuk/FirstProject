@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
-public class LibraryOrder{
+public class LibraryOrder implements Cloneable {
     private List<Observer> observers;
     private int orderId;
-    public Book book;
-    public Client client;
+    private Book book;
+    private Client client;
     private LocalDate start;
     private LocalDate end;
-    protected boolean isBack;
+    private boolean isBack;
 
     public LibraryOrder() {
         observers = new LinkedList<>();
@@ -30,23 +30,52 @@ public class LibraryOrder{
             observer.newOrder(this);
     }
 
-    public int getOderId(){return orderId;}
-    public LocalDate getStart(){return  start;}
-    public LocalDate getEnd(){return end;}
-    public  Book getBook(){return book;}
+    public int getOderId() {
+        return orderId;
+    }
+
+    public LocalDate getStart() {
+        return start;
+    }
+
+    public LocalDate getEnd() {
+        return end;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public boolean getBack() {
+        return isBack;
+    }
+
+    public void setBack() {
+        this.isBack = !isBack;
+    }
 
     public void setOrder(int orderId, Book book, Client client, LocalDate start, LocalDate end, boolean isBack) {
-        this.orderId=orderId;
+        this.orderId = orderId;
         this.book = book;
         this.client = client;
-        this.start=start;
-        this.end=end;
-        this.isBack=isBack;
+        this.start = start;
+        this.end = end;
+        this.isBack = isBack;
         notifyObserver();
     }
 
     @Override
     public String toString() {
-        return ("Id: "+orderId+" book: "+book.getName()+" client: "+client.getSurname()+" start date: "+start+" end date: "+end);
+        return ("Id: " + orderId + " book: " + book.getName() + " client: " + client.getSurname() + " start date: " + start + " end date: " + end + " back status: " + isBack);
+    }
+
+    public LibraryOrder clone() throws CloneNotSupportedException {
+        LibraryOrder newLibraryOrder = (LibraryOrder) super.clone();
+        newLibraryOrder.client = (Client) client.clone();
+        return newLibraryOrder;
     }
 }

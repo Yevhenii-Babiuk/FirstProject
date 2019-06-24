@@ -2,7 +2,7 @@ package project.first.epam.babiuk.PersonalTask;
 
 import java.time.LocalDate;
 
-public class Client {
+public class Client implements Cloneable{
     private String name;
     private String surname;
     private String middleName;
@@ -35,5 +35,8 @@ public class Client {
 
     public LocalDate getStartDate() {
         return startDate;
+    }
+    public  Client clone() throws  CloneNotSupportedException{
+        return (Client) super.clone();
     }
 }

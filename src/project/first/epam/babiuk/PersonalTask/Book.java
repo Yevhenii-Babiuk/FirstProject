@@ -11,7 +11,7 @@ public class Book {
     private String city;
     private String publishingName;
     private int totalNumber;
-    public int availableNumber;
+    private int availableNumber;
 
     public Book(String name, List author, long id, int year, String city, String publishingName, int totalNumber, int availableNumber){
         this.name=name;
@@ -56,4 +56,5 @@ public class Book {
         return this.availableNumber;
     }
 
+    public void setAvailableNumber(int change){this.availableNumber+=change;}
 }
